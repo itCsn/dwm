@@ -22,6 +22,11 @@ set noshowmode
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set matchpairs+=<:>
 set smartcase
+set undofile
+set undodir=~/.vim/undodir
+set smartindent
+set nowrap
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -64,6 +69,9 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+"utils
+Plug 'vim-utils/vim-man'
+Plug 'mbbill/undotree'
 
 "ligthline
  Plug 'itchyny/lightline.vim'
@@ -84,6 +92,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-fugitive'
+Plug 'leafgarland/typescript-vim'
 
 " Easily surround chunks of text
 Plug 'tpope/vim-surround'
@@ -104,6 +113,26 @@ set bg=dark
 let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 let g:indent_blankline_char = '|'
+
+"
+autocmd FileType python call AutoCmd_python()
+
+fun! AutoCmd_python()
+        "setlocal other options for python, then:
+    nnoremap <buffer> <leader>p :w <CR> :exec '!python' shellescape(@%, 1)<cr>
+
+endf
+augroup vimrc-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter /,\? :set hlsearch
+    autocmd CmdlineLeave /,\? :set nohlsearch
+    augroup END
+
+autocmd FileType cpp set keywordprg=cppman
+
+if executable('rg')
+    let g:rg_derive_root='true'
+endif
 
 "Shortcutting split navigation
 map <C-h> <C-w>h
@@ -145,17 +174,4 @@ autocmd TermOpen term://* startinsert
 nnoremap <leader>gcc :!g++ -o  %:r % -std=c++11<Enter>
 map <leader>tn :tabnew 
 
-autocmd FileType python call AutoCmd_python()
 
-fun! AutoCmd_python()
-        "setlocal other options for python, then:
-    nnoremap <buffer> <leader>p :w <CR> :exec '!python' shellescape(@%, 1)<cr>
-
-endf
-augroup vimrc-incsearch-highlight
-    autocmd!
-    autocmd CmdlineEnter /,\? :set hlsearch
-    autocmd CmdlineLeave /,\? :set nohlsearch
-    augroup END
-
-autocmd FileType cpp set keywordprg=cppman
