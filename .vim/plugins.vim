@@ -9,9 +9,9 @@ Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
 Plug 'sheerun/vim-polyglot'
 
 """ c++
-Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'vim-syntastic/syntastic'
-Plug 'rhysd/vim-clang-format'
+"Plug 'jackguo380/vim-lsp-cxx-highlight'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'rhysd/vim-clang-format'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Auto Completion
 Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
@@ -23,14 +23,8 @@ Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 
 " Plug 'ryanoasis/vim-devicons' Icons without colours
-Plug 'akinsho/nvim-bufferline.lua'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
-
-"Fzf like 
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 
 "vs icons
 Plug 'onsails/lspkind-nvim'
@@ -62,18 +56,15 @@ Plug 'tpope/vim-surround'
 
 "Enable Rainbow Parentheses Improved
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'Yggdroot/indentLine'
 
 " Syntax checking
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'
 
-" Easily surround chunks of text
-Plug 'tpope/vim-surround'
 
 "Autocomplete for c++
 Plug 'deoplete-plugins/deoplete-clang'

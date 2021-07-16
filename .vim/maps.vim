@@ -48,5 +48,11 @@ map <leader>tn :tabnew
 "Undo tree
 nnoremap <leader>ut :UndotreeToggle<CR>
 
+"Git -> fugitive
+map <leader> gh :diffget //3<CR>
+map <leader> gu :diffget //2<CR>
+map <leader> gs :G<CR>
+
+
 " Kite
 nmap <silent> <buffer> gK <Plug>(kite-docs)

@@ -3,19 +3,21 @@ let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 let g:indent_blankline_char = '|'
 
-"C++
-let g:syntastic_cpp_checkers = ['cpplint']
-let g:syntastic_c_checkers = ['cpplint']
-let g:syntastic_cpp_cpplint_exec = 'cpplint'"
 
 "kite
-let g:kite_supported_languages = ['javascript', 'python']
+let g:kite_supported_languages = ['*']
+let g:kite_previous_placeholder = '<C-H>'
+let g:kite_next_placeholder = '<C-L>'
+let g:kite_documentation_continual=1
+let g:kite_log=1
+autocmd CompleteDone * if !pumvisible() | pclose | endif
+let g:python_highlight_space_errors = 0
 
 " Lightlane
 let g:lightline = {
       \ 'active': {
       \   'left': [['mode', 'paste'], [], ['relativepath', 'modified']],
-      \   'right': [['kitestatus'], ['filetype', 'percent', 'lineinfo'], ['gitbranch']]
+      \   'right': [['kitestatus'], ['fileencoding', 'filetype', 'percent', 'lineinfo'] ,['fileformat'], ['gitbranch']]
       \ },
       \ 'inactive': {
       \   'left': [['inactive'], ['relativepath']],
@@ -43,9 +45,8 @@ autocmd FileType python let b:coc_suggest_disable = 1
 autocmd FileType javascript let b:coc_suggest_disable = 1
 autocmd FileType scss setl iskeyword+=@-@
 
-" Use <c-space> to trigger completion
-if &filetype == "javascript" || &filetype == "python"
-    inoremap <c-space> <C-x><C-u>
-else
-    inoremap <silent><expr> <c-space> coc#refresh()
-endif
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsSnippetDirectories=[$HOME.'/config/.vim/UltiSnips']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
