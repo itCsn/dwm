@@ -1,4 +1,5 @@
 "Some base
+set shortmess+=c
 set guicursor=a:
 set number
 set ruler
@@ -16,8 +17,8 @@ set wildmode=longest,list,full
 set splitbelow splitright
 set softtabstop=4
 set shiftwidth=4
-set incsearch
-set hlsearch
+"set incsearch
+"set hlsearch
 set noshowmode
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set matchpairs+=<:>
@@ -26,7 +27,9 @@ set undofile
 set undodir=~/.vim/undodir
 set smartindent
 set nowrap
-
+nnoremap <silent> <leader>, :noh<cr> "Stop highlight after searching
+set ignorecase    " case insensitive searching (unless specified)
+set autoindent
 
 call plug#begin('~/.vim/plugged')
 
@@ -35,16 +38,24 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
+Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
 """ c++
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-syntastic/syntastic'
 Plug 'rhysd/vim-clang-format'
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Auto Completion
+Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
+Plug 'https://github.com/lifepillar/pgsql.vim' " PSQL Pluging needs :SQLSetType pgsql.vim
+Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
+Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 "bufferline
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 
 " Plug 'ryanoasis/vim-devicons' Icons without colours
 Plug 'akinsho/nvim-bufferline.lua'
+Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 
 "Fzf like 
 Plug 'nvim-lua/popup.nvim'
@@ -153,7 +164,7 @@ let g:rainbow_active = 1
 map <C-p> :w <CR> :! python
 
 "Undo tree
-nnoremap <leader>gt :GundoToggle<CR>
+nnoremap <leader>ut :UndotreeToggle<CR>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -166,12 +177,22 @@ let g:syntastic_cpp_checkers = ['cpplint']
 let g:syntastic_c_checkers = ['cpplint']
 let g:syntastic_cpp_cpplint_exec = 'cpplint'"
 nnoremap <Leader>cf :<C-u>ClangFormat<CR>
-nnoremap <C-x> :!./%:r.out
 autocmd TermOpen term://* startinsert
 
 "Aditional Remap
-"map <leader>gcc :w <CR> :!g++ % -o %< 
-nnoremap <leader>gcc :!g++ -o  %:r % -std=c++11<Enter>
+map <leader>gcc :silent <CR> :w <CR> :!g++ % -o %< 
+"nnoremap <leader>gcc :silent! <CR> :!g++ -o  %:r % -std=c++11<Enter>
 map <leader>tn :tabnew 
 
+"Autosave
 
+inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
+
+"let g: kite_supported_lenguages = [ "*" ]
+
+" coc
+nmap <silent> cd <Plug>(coc-definition)
+nmap <silent> ct <Plug>(coc-type-definition)
+nmap <silent> ci <Plug>(coc-implementation)
+nmap <silent> cr <Plug>(coc-references)
+inoremap <silent><expr> <c-space> coc#refresh()
